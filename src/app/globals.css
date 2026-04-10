@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* ================================
+   猫人狗人 · 主题色系
+   ================================ */
+
+@theme inline {
+  /* 猫系配色 - 冷色调 */
+  --color-cat-blue: #8B9DAF;
+  --color-cat-lavender: #B8A9C9;
+  --color-cat-mint: #A8D8C8;
+
+  /* 犬系配色 - 暖色调 */
+  --color-dog-amber: #E8A87C;
+  --color-dog-orange: #F4A460;
+  --color-dog-cream: #F5E6CA;
+
+  /* 狐系点缀 */
+  --color-fox-gold: #D4A574;
+
+  /* 狼系质感 */
+  --color-wolf-dark: #4A4A5A;
+
+  /* 基础背景/前景 */
+  --color-background: #FAFAF8;
+  --color-foreground: #2C2C2C;
+
+  /* 字体 */
+  --font-sans: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+:root {
+  --background: #FAFAF8;
+  --foreground: #2C2C2C;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+}
+
+/* 安全区域适配（移动端） */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
