@@ -220,6 +220,62 @@ export default function ResultPageClient() {
           </div>
         </motion.div>
 
+        {/* 🧠 内在机制 */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <ProfileSection
+            emoji="🧠"
+            title="内在机制"
+            items={[
+              { label: '压力反应', content: breed.innerMechanism.stressResponse },
+              { label: '充电方式', content: breed.innerMechanism.rechargeMode },
+              { label: '情绪模式', content: breed.innerMechanism.emotionalPattern },
+            ]}
+            themeColor={themeColor}
+          />
+        </motion.div>
+
+        {/* 💼 职场风格 */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <ProfileSection
+            emoji="💼"
+            title="职场风格"
+            items={[
+              { label: '当领导时', content: breed.workStyle.asLeader },
+              { label: '当下属时', content: breed.workStyle.asFollower },
+              { label: '开会风格', content: breed.workStyle.meetingStyle },
+            ]}
+            themeColor={themeColor}
+          />
+        </motion.div>
+
+        {/* ❤️ 恋爱模式 */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <ProfileSection
+            emoji="❤️"
+            title="恋爱模式"
+            items={[
+              { label: '心动信号', content: breed.loveStyle.crushSignal },
+              { label: '雷点', content: breed.loveStyle.dealBreaker },
+              { label: '理想相处', content: breed.loveStyle.idealRelationship },
+            ]}
+            themeColor={themeColor}
+          />
+        </motion.div>
+
+        {/* 🤝 社交习惯 */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <ProfileSection
+            emoji="🤝"
+            title="社交习惯"
+            items={[
+              { label: '朋友群角色', content: breed.socialHabit.friendGroupRole },
+              { label: '社交电量', content: breed.socialHabit.socialBattery },
+              { label: '友谊雷区', content: breed.socialHabit.friendshipRedFlag },
+            ]}
+            themeColor={themeColor}
+          />
+        </motion.div>
+
         {/* 扎心一句 */}
         <motion.div
           variants={itemVariants}
@@ -470,5 +526,38 @@ function SocialActionCard({
       </div>
       <span className="text-[#CACACA] text-sm">›</span>
     </motion.div>
+  );
+}
+
+function ProfileSection({
+  emoji,
+  title,
+  items,
+  themeColor,
+}: {
+  emoji: string;
+  title: string;
+  items: { label: string; content: string }[];
+  themeColor: string;
+}) {
+  return (
+    <div className="bg-white rounded-3xl p-5 border border-[#E8E8E4] shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-lg">{emoji}</span>
+        <h3 className="text-sm font-bold text-[#2C2C2C] tracking-wide">{title}</h3>
+      </div>
+      <div className="space-y-4">
+        {items.map((item) => (
+          <div key={item.label}>
+            <p className="text-xs font-bold mb-1" style={{ color: themeColor }}>
+              {item.label}
+            </p>
+            <p className="text-sm text-[#4A4A5A] leading-relaxed">
+              {item.content}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
