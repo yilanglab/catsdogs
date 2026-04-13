@@ -127,7 +127,7 @@ function safeInt(val: string | null): number {
 }
 
 /**
- * 通用URL得分解析（自动识别结果页/照镜子/配对格式）
+ * 通用URL得分解析（自动识别结果页/照镜子格式）
  * 用于需要在多种URL格式下尝试解析得分的场景
  */
 export function parseAnyScoreUrl(search: string): Score | null {
