@@ -40,7 +40,7 @@ export default function ShareCardButton({ breed, dimensions, score }: ShareCardB
         backgroundColor: '#FAFAF8',
         logging: false,
         width: 375,
-        height: 660,
+        height: 667,
       });
 
       const dataUrl = canvas.toDataURL('image/png');
