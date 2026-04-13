@@ -104,7 +104,7 @@ export default function ResultPageClient() {
   const nemesisBreed = BREEDS.find((b) => b.id === breed.nemesis);
 
   return (
-    <main className="min-h-screen bg-[#FAFAF8] pb-16">
+    <main className="min-h-screen bg-[#FAFAF8]">
       {/* ── Hero 区域 ── */}
       <div
         className="relative overflow-hidden px-6 pt-16 pb-12"
@@ -299,7 +299,7 @@ export default function ResultPageClient() {
         {(bestMatchBreed || nemesisBreed) && (
           <motion.div variants={itemVariants} className="mb-4">
             <SectionTitle emoji="🤝" title="品种关系" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-3">
               {bestMatchBreed && (
                 <RelationCard
                   emoji="💝"
@@ -352,7 +352,7 @@ export default function ResultPageClient() {
         </motion.div>
 
         {/* 分享按钮 */}
-        <motion.div variants={itemVariants} className="mt-6 space-y-3">
+        <motion.div variants={itemVariants} className="mt-6 space-y-3 pb-8 safe-bottom">
           <motion.button
             onClick={handleShare}
             className="w-full py-4 rounded-2xl font-semibold text-lg text-white shadow-lg"

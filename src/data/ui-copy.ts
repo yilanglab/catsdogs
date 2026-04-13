@@ -86,7 +86,6 @@ export const RESULT_COPY = {
   shareImageButton: '生成分享图',
   copyLinkButton: '复制链接',
   inviteMirrorButton: '邀请朋友测测我',
-  invitePairButton: '邀请 TA 一起测',
   retestButton: '重新测试',
 
   // 分享文案模板
