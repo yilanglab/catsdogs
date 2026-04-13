@@ -40,7 +40,6 @@ export default function ShareCardButton({ breed, dimensions, score }: ShareCardB
         backgroundColor: '#FAFAF8',
         logging: false,
         width: 375,
-        height: 667,
       });
 
       const dataUrl = canvas.toDataURL('image/png');
@@ -159,8 +158,10 @@ export default function ShareCardButton({ breed, dimensions, score }: ShareCardB
                 alt="分享卡片预览"
                 style={{
                   width: '100%',
-                  maxWidth: 340,
-                  borderRadius: 20,
+                  maxWidth: 300,
+                  maxHeight: '65vh',
+                  objectFit: 'contain',
+                  borderRadius: 16,
                   boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
                 }}
               />

@@ -1,18 +1,20 @@
 'use client';
 
 /**
- * ShareCard — 结果分享图卡片（重设计版）
+ * ShareCard — 结果分享长图
  *
- * 固定 375×667px（iPhone 屏比例），纯 inline styles，
- * 无 Framer Motion，可被 html2canvas 正常截图。
+ * 固定宽度 375px，高度自适应内容。
+ * 包含结果页所有内容板块：Hero + 人设 + 三维 + 超能力/软肋 +
+ * 4个深度画像板块 + 扎心一句 + 品种关系 + 底部水印。
  *
- * 布局（从上到下）：
- *   1. Hero (~200px)  — 渐变背景 + 品种标题区
- *   2. Content (~417px) — 白底内容区
- *   3. Footer (~50px)  — 渐变水印（绝对定位）
+ * 规则：
+ * - 纯 inline styles（html2canvas 兼容）
+ * - 不用 Framer Motion
+ * - 不用 Tailwind class
  */
 
 import React from 'react';
+import { BREEDS } from '@/data/breeds';
 import type { Breed, DimensionResult, Score } from '@/lib/types';
 
 interface ShareCardProps {
@@ -22,123 +24,83 @@ interface ShareCardProps {
   cardRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const ENERGY_LABEL: Record<string, string> = {
-  low: '低能量',
-  mid: '中能量',
-  high: '高能量',
-};
-const STRATEGY_LABEL: Record<string, string> = {
-  pure: '纯系',
-  fox: '狐系',
-  wolf: '狼系',
-};
-const CORE_LABEL: Record<string, string> = {
-  cat: '猫系',
-  dog: '犬系',
-};
-const ENERGY_ICON: Record<string, string> = { low: '⚡', mid: '⚡', high: '⚡' };
-const STRATEGY_ICON: Record<string, string> = { pure: '🧩', fox: '🦊', wolf: '🐺' };
-const CORE_ICON: Record<string, string> = { cat: '🌀', dog: '🐾' };
+const ENERGY_LABEL: Record<string, string> = { low: '低能量 · 安静内收', mid: '中能量 · 温和流动', high: '高能量 · 活跃外放' };
+const STRATEGY_LABEL: Record<string, string> = { pure: '纯系 · 钝感无害', fox: '狐系 · 机敏高情商', wolf: '狼系 · 审视掌控' };
+const CORE_LABEL: Record<string, string> = { cat: '猫系 · 自我驱动', dog: '犬系 · 关系驱动' };
 
-export default function ShareCard({ breed, dimensions, cardRef }: ShareCardProps) {
+const ENERGY_SHORT: Record<string, string> = { low: '低能量', mid: '中能量', high: '高能量' };
+const STRATEGY_SHORT: Record<string, string> = { pure: '纯系', fox: '狐系', wolf: '狼系' };
+const CORE_SHORT: Record<string, string> = { cat: '猫系', dog: '犬系' };
+
+export default function ShareCard({ breed, dimensions, score, cardRef }: ShareCardProps) {
   const isCat = breed.core === 'cat';
-
-  // ── Theme ──────────────────────────────────────────────────
   const themeGradient = isCat
     ? 'linear-gradient(135deg, #8B9DAF 0%, #B8A9C9 100%)'
     : 'linear-gradient(135deg, #E8A87C 0%, #F4A460 100%)';
   const themeColor = isCat ? '#8B9DAF' : '#E8A87C';
   const themeBg = isCat ? '#EEF1F5' : '#FDF3E9';
-  const themeBorder = isCat ? '#8B9DAF40' : '#E8A87C40';
 
-  // ── Dimension pills ────────────────────────────────────────
-  const dimPills = [
-    {
-      icon: ENERGY_ICON[dimensions.energyLevel],
-      label: ENERGY_LABEL[dimensions.energyLevel],
-    },
-    {
-      icon: STRATEGY_ICON[dimensions.strategyLevel],
-      label: STRATEGY_LABEL[dimensions.strategyLevel],
-    },
-    {
-      icon: CORE_ICON[dimensions.coreType],
-      label: CORE_LABEL[dimensions.coreType],
-    },
-  ];
+  const energyPct = Math.round(((score.energy - 5) / 10) * 100);
+  const strategyPct = Math.round(((score.strategy - 5) / 10) * 100);
+  const corePct = Math.round(((score.core - 5) / 5) * 100);
+
+  const bestMatchBreed = BREEDS.find((b) => b.id === breed.bestMatch);
+  const nemesisBreed = BREEDS.find((b) => b.id === breed.nemesis);
 
   return (
     <div
       ref={cardRef}
       style={{
         width: 375,
-        height: 667,
         background: '#FAFAF8',
         fontFamily: '-apple-system, "PingFang SC", "Helvetica Neue", sans-serif',
-        overflow: 'hidden',
         position: 'relative',
         flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
       }}
     >
-      {/* ══════════════════════════════════════════
-          1. HERO SECTION  ~200px
-      ══════════════════════════════════════════ */}
-      <div
-        style={{
-          background: themeGradient,
-          padding: '36px 28px 28px',
-          position: 'relative',
-          overflow: 'hidden',
-          flexShrink: 0,
-        }}
-      >
-        {/* 装饰圆 */}
+      {/* ── Hero ── */}
+      <div style={{
+        background: themeGradient,
+        padding: '40px 28px 32px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
         <div style={{
-          position: 'absolute', top: -36, right: -36,
-          width: 130, height: 130, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.22), transparent)',
-          pointerEvents: 'none',
+          position: 'absolute', top: -30, right: -30,
+          width: 120, height: 120, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.25), transparent)',
         }} />
         <div style={{
-          position: 'absolute', bottom: -24, left: -24,
-          width: 90, height: 90, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.14), transparent)',
-          pointerEvents: 'none',
+          position: 'absolute', bottom: -20, left: -20,
+          width: 80, height: 80, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.15), transparent)',
         }} />
 
-        {/* 猫系/犬系 label pill */}
         <div style={{
           display: 'inline-flex', alignItems: 'center',
           background: 'rgba(255,255,255,0.22)',
-          borderRadius: 20, padding: '4px 12px',
-          marginBottom: 10,
+          borderRadius: 20, padding: '4px 12px', marginBottom: 12,
         }}>
-          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.92)', letterSpacing: 0.5 }}>
+          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.9)' }}>
             {isCat ? '🐱 猫系内核' : '🐶 犬系内核'}
           </span>
         </div>
 
-        {/* 品种名 + 英文名 */}
-        <div style={{ fontSize: 30, fontWeight: 800, color: 'white', lineHeight: 1.15, marginBottom: 3 }}>
+        <div style={{ fontSize: 28, fontWeight: 800, color: 'white', lineHeight: 1.2, marginBottom: 4 }}>
           {breed.name}
         </div>
-        <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.72)', marginBottom: 12, letterSpacing: 0.8 }}>
+        <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', marginBottom: 12 }}>
           {breed.nameEn}
         </div>
 
-        {/* 代号 pill */}
         <div style={{
           display: 'inline-flex', alignItems: 'center',
           background: 'rgba(255,255,255,0.28)',
-          borderRadius: 14, padding: '6px 16px',
-          marginBottom: 14,
+          borderRadius: 14, padding: '6px 16px', marginBottom: 14,
         }}>
-          <span style={{ fontSize: 15, fontWeight: 700, color: 'white' }}>「{breed.nickname}」</span>
+          <span style={{ fontSize: 16, fontWeight: 700, color: 'white' }}>「{breed.nickname}」</span>
         </div>
 
-        {/* 3 tag pills */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {breed.tags.map((tag) => (
             <span key={tag} style={{
@@ -152,157 +114,194 @@ export default function ShareCard({ breed, dimensions, cardRef }: ShareCardProps
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════
-          2. CONTENT SECTION
-      ══════════════════════════════════════════ */}
-      <div
-        style={{
-          flex: 1,
-          padding: '18px 20px 60px', /* bottom padding leaves room for footer */
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 12,
-          background: 'white',
-          overflow: 'hidden',
-        }}
-      >
-        {/* 2a. Tagline — italic, centered card */}
+      {/* ── Content ── */}
+      <div style={{ padding: '16px 20px 0' }}>
+
+        {/* 一句话人设 */}
         <div style={{
-          background: '#FAFAF8',
-          borderRadius: 14,
-          padding: '12px 16px',
+          background: 'white', borderRadius: 20,
+          padding: '14px 18px', marginBottom: 14,
           border: '1px solid #E8E8E4',
         }}>
           <p style={{
-            fontSize: 13,
-            fontWeight: 500,
-            color: '#2C2C2C',
-            lineHeight: 1.65,
-            textAlign: 'center',
-            fontStyle: 'italic',
-            margin: 0,
+            fontSize: 13, fontWeight: 500, color: '#2C2C2C',
+            lineHeight: 1.6, textAlign: 'center', fontStyle: 'italic', margin: 0,
           }}>
             「{breed.tagline}」
           </p>
         </div>
 
-        {/* 2b. 三维标签行 — compact inline pills */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          flexWrap: 'nowrap',
-        }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#9B9BAA', flexShrink: 0 }}>三维</span>
-          <div style={{ width: 1, height: 12, background: '#E0E0E8', flexShrink: 0 }} />
-          {dimPills.map((p, i) => (
-            <React.Fragment key={i}>
-              <span style={{
-                fontSize: 11,
-                fontWeight: 600,
-                color: themeColor,
-                background: themeBg,
-                borderRadius: 20,
-                padding: '4px 10px',
-                whiteSpace: 'nowrap',
-              }}>
-                {p.icon} {p.label}
-              </span>
-              {i < dimPills.length - 1 && (
-                <span style={{ fontSize: 11, color: '#D0D0D8', flexShrink: 0 }}>·</span>
-              )}
-            </React.Fragment>
-          ))}
+        {/* 三维解析 */}
+        <SectionHeader emoji="🔬" title="三维解析" />
+        <div style={{ marginBottom: 14 }}>
+          <DimBar label="⚡ 能量" value={ENERGY_SHORT[dimensions.energyLevel]} desc={ENERGY_LABEL[dimensions.energyLevel]} pct={energyPct} color="#8B9DAF" />
+          <DimBar label="🧩 策略" value={STRATEGY_SHORT[dimensions.strategyLevel]} desc={STRATEGY_LABEL[dimensions.strategyLevel]} pct={strategyPct} color="#D4A574" />
+          <DimBar label="🌀 内核" value={CORE_SHORT[dimensions.coreType]} desc={CORE_LABEL[dimensions.coreType]} pct={corePct} color={isCat ? '#B8A9C9' : '#E8A87C'} />
         </div>
 
-        {/* 2c. 扎心一句 — visual highlight */}
+        {/* 超能力 & 软肋 */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
+          <MiniCard emoji="⚡" title="超能力" content={breed.superpower} bgColor="#F0F9F4" textColor="#3D8A5A" />
+          <MiniCard emoji="💧" title="软肋" content={breed.weakness} bgColor="#FFF4F4" textColor="#C05050" />
+        </div>
+
+        {/* 🧠 内在机制 */}
+        <ProfileBlock emoji="🧠" title="内在机制" themeColor={themeColor} items={[
+          { label: '压力反应', content: breed.innerMechanism.stressResponse },
+          { label: '充电方式', content: breed.innerMechanism.rechargeMode },
+          { label: '情绪模式', content: breed.innerMechanism.emotionalPattern },
+        ]} />
+
+        {/* 💼 职场风格 */}
+        <ProfileBlock emoji="💼" title="职场风格" themeColor={themeColor} items={[
+          { label: '当领导时', content: breed.workStyle.asLeader },
+          { label: '当下属时', content: breed.workStyle.asFollower },
+          { label: '开会风格', content: breed.workStyle.meetingStyle },
+        ]} />
+
+        {/* ❤️ 恋爱模式 */}
+        <ProfileBlock emoji="❤️" title="恋爱模式" themeColor={themeColor} items={[
+          { label: '心动信号', content: breed.loveStyle.crushSignal },
+          { label: '雷点', content: breed.loveStyle.dealBreaker },
+          { label: '理想相处', content: breed.loveStyle.idealRelationship },
+        ]} />
+
+        {/* 🤝 社交习惯 */}
+        <ProfileBlock emoji="🤝" title="社交习惯" themeColor={themeColor} items={[
+          { label: '朋友群角色', content: breed.socialHabit.friendGroupRole },
+          { label: '社交电量', content: breed.socialHabit.socialBattery },
+          { label: '友谊雷区', content: breed.socialHabit.friendshipRedFlag },
+        ]} />
+
+        {/* 扎心一句 */}
         <div style={{
-          background: themeBg,
-          borderRadius: 14,
-          padding: '14px 16px',
-          border: `1.5px solid ${themeBorder}`,
-          borderLeft: `4px solid ${themeColor}`,
+          background: themeBg, borderRadius: 16, padding: '14px 16px',
+          border: `1.5px solid ${themeColor}35`, marginBottom: 14,
         }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-            <span style={{ fontSize: 18, flexShrink: 0, lineHeight: 1.4 }}>💬</span>
-            <p style={{
-              fontSize: 13,
-              color: '#2C2C2C',
-              lineHeight: 1.7,
-              margin: 0,
-              fontWeight: 500,
-            }}>
-              {breed.heartbreaker}
-            </p>
+            <span style={{ fontSize: 18, flexShrink: 0 }}>💬</span>
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 700, color: themeColor, margin: '0 0 4px 0' }}>扎心一句</p>
+              <p style={{ fontSize: 13, color: '#2C2C2C', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                {breed.heartbreaker}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* 2d. 超能力 + 软肋 2-column grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <div style={{
-            background: '#F0F9F4',
-            borderRadius: 12,
-            padding: '10px 12px',
-          }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#3D8A5A', margin: '0 0 5px 0' }}>⚡ 超能力</p>
-            <p style={{
-              fontSize: 11,
-              color: '#4A4A5A',
-              lineHeight: 1.55,
-              margin: 0,
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-            } as React.CSSProperties}>
-              {breed.superpower}
-            </p>
+        {/* 品种关系 */}
+        {(bestMatchBreed || nemesisBreed) && (
+          <div style={{ marginBottom: 14 }}>
+            <SectionHeader emoji="🤝" title="品种关系" />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {bestMatchBreed && (
+                <RelationMini emoji="💝" title="最佳拍档" breed={bestMatchBreed} bgColor="#F0FBF1" textColor="#4CAF50" />
+              )}
+              {nemesisBreed && (
+                <RelationMini emoji="⚔️" title="天敌" breed={nemesisBreed} bgColor="#FFF4F4" textColor="#E57373" />
+              )}
+            </div>
           </div>
-          <div style={{
-            background: '#FFF4F4',
-            borderRadius: 12,
-            padding: '10px 12px',
-          }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#C05050', margin: '0 0 5px 0' }}>💧 软肋</p>
-            <p style={{
-              fontSize: 11,
-              color: '#4A4A5A',
-              lineHeight: 1.55,
-              margin: 0,
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-            } as React.CSSProperties}>
-              {breed.weakness}
-            </p>
-          </div>
-        </div>
+        )}
       </div>
 
-      {/* ══════════════════════════════════════════
-          3. FOOTER — absolute, gradient fade
-      ══════════════════════════════════════════ */}
+      {/* ── Footer ── */}
       <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 52,
-        padding: '0 20px',
-        background: 'linear-gradient(0deg, rgba(255,255,255,1) 55%, rgba(255,255,255,0))',
-        display: 'flex',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between',
-        paddingBottom: 10,
+        padding: '20px 20px 24px',
+        textAlign: 'center',
+        borderTop: '1px solid #E8E8E4',
+        marginTop: 6,
       }}>
-        <p style={{ fontSize: 10, color: '#C0C0C8', margin: 0, letterSpacing: 0.5 }}>
+        <p style={{ fontSize: 12, color: '#8B9DAF', margin: 0, fontWeight: 600, letterSpacing: 1 }}>
           猫人狗人 · 三维动物人格测试
         </p>
-        <p style={{ fontSize: 10, color: '#C8C8D0', margin: 0 }}>
-          扫码来测 →
+        <p style={{ fontSize: 10, color: '#C0C0C8', margin: '4px 0 0 0' }}>
+          来测测你是哪种猫人狗人？
         </p>
       </div>
+    </div>
+  );
+}
+
+// ─── 子组件 ──────────────────────────────────────────
+
+function SectionHeader({ emoji, title }: { emoji: string; title: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, padding: '0 2px' }}>
+      <span style={{ fontSize: 13 }}>{emoji}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, color: '#2C2C2C', letterSpacing: 1 }}>{title}</span>
+    </div>
+  );
+}
+
+function DimBar({ label, value, desc, pct, color }: {
+  label: string; value: string; desc: string; pct: number; color: string;
+}) {
+  return (
+    <div style={{
+      background: 'white', borderRadius: 12, padding: '10px 12px',
+      border: '1px solid #E8E8E4', marginBottom: 6,
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: '#2C2C2C' }}>{label}</span>
+        <span style={{
+          fontSize: 10, fontWeight: 600, padding: '2px 8px', borderRadius: 10,
+          background: `${color}20`, color,
+        }}>{value}</span>
+      </div>
+      <div style={{ height: 4, background: '#F0F0EC', borderRadius: 4, overflow: 'hidden', marginBottom: 4 }}>
+        <div style={{ height: '100%', width: `${pct}%`, background: color, borderRadius: 4 }} />
+      </div>
+      <p style={{ fontSize: 10, color: '#8B9DAF', margin: 0 }}>{desc}</p>
+    </div>
+  );
+}
+
+function MiniCard({ emoji, title, content, bgColor, textColor }: {
+  emoji: string; title: string; content: string; bgColor: string; textColor: string;
+}) {
+  return (
+    <div style={{ background: bgColor, borderRadius: 14, padding: '10px 12px' }}>
+      <p style={{ fontSize: 10, fontWeight: 700, color: textColor, margin: '0 0 4px 0' }}>{emoji} {title}</p>
+      <p style={{ fontSize: 11, color: '#4A4A5A', lineHeight: 1.5, margin: 0 }}>{content}</p>
+    </div>
+  );
+}
+
+function ProfileBlock({ emoji, title, themeColor, items }: {
+  emoji: string; title: string; themeColor: string;
+  items: { label: string; content: string }[];
+}) {
+  return (
+    <div style={{
+      background: 'white', borderRadius: 20, padding: '16px 16px',
+      border: '1px solid #E8E8E4', marginBottom: 14,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
+        <span style={{ fontSize: 15 }}>{emoji}</span>
+        <span style={{ fontSize: 12, fontWeight: 700, color: '#2C2C2C' }}>{title}</span>
+      </div>
+      {items.map((item, i) => (
+        <div key={item.label} style={{ marginBottom: i < items.length - 1 ? 10 : 0 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: themeColor, margin: '0 0 3px 0' }}>{item.label}</p>
+          <p style={{ fontSize: 12, color: '#4A4A5A', lineHeight: 1.6, margin: 0 }}>{item.content}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function RelationMini({ emoji, title, breed, bgColor, textColor }: {
+  emoji: string; title: string; breed: Breed; bgColor: string; textColor: string;
+}) {
+  return (
+    <div style={{ background: bgColor, borderRadius: 14, padding: '10px 12px', border: `1px solid ${textColor}25` }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 6 }}>
+        <span style={{ fontSize: 12 }}>{emoji}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, color: textColor }}>{title}</span>
+      </div>
+      <p style={{ fontSize: 12, fontWeight: 700, color: '#2C2C2C', margin: 0 }}>{breed.name}</p>
+      <p style={{ fontSize: 10, color: '#8B9DAF', margin: '2px 0 0 0' }}>{breed.nickname}</p>
     </div>
   );
 }
