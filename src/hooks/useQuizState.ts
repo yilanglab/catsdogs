@@ -29,8 +29,6 @@ interface UseQuizStateOptions {
   mode?: QuizMode;
   /** 照镜子模式：被测人的自测得分 */
   mirrorFromScore?: Score;
-  /** CP配对模式：用户A的得分 */
-  pairFromScore?: Score;
 }
 
 interface UseQuizStateReturn {
@@ -62,13 +60,12 @@ export function useQuizState({
   questions,
   mode = 'self',
   mirrorFromScore,
-  pairFromScore,
 }: UseQuizStateOptions): UseQuizStateReturn {
   // 初始化时随机化选项顺序
   const [preparedQuestions] = useState<Question[]>(() => prepareQuestions(questions));
 
   const [state, setState] = useState<QuizState>(() =>
-    createInitialQuizState(preparedQuestions, mode, mirrorFromScore, pairFromScore)
+    createInitialQuizState(preparedQuestions, mode, mirrorFromScore)
   );
 
   const currentQuestion = useMemo<Question | null>(() => {
@@ -89,8 +86,8 @@ export function useQuizState({
   }, []);
 
   const restart = useCallback(() => {
-    setState(resetQuiz(questions, mode, mirrorFromScore, pairFromScore));
-  }, [questions, mode, mirrorFromScore, pairFromScore]);
+    setState(resetQuiz(questions, mode, mirrorFromScore));
+  }, [questions, mode, mirrorFromScore]);
 
   // 结果只在完成后计算一次（useMemo缓存）
   const result = useMemo<ReturnType<typeof computeResult> | null>(() => {

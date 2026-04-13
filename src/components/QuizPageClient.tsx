@@ -13,7 +13,7 @@ import {
   computeResult,
   createInitialQuizState,
 } from "@/lib/quiz-engine";
-import { buildResultUrl, parseMirrorUrl, parsePairUrl } from "@/lib/url-codec";
+import { buildResultUrl, parseMirrorUrl } from "@/lib/url-codec";
 import type { QuizState, Question, Option, QuizMode } from "@/lib/types";
 
 const SLIDE_VARIANTS = {
@@ -40,7 +40,6 @@ export default function QuizPageClient() {
   // Determine mode from URL
   const mode = useMemo<QuizMode>(() => {
     if (searchParams.get("from")) return "mirror";
-    if (searchParams.get("a")) return "pair";
     return "self";
   }, [searchParams]);
 
@@ -55,11 +54,7 @@ export default function QuizPageClient() {
       mode === "mirror"
         ? parseMirrorUrl(`from=${searchParams.get("from")}`)
         : undefined;
-    const pairScore =
-      mode === "pair"
-        ? parsePairUrl(`a=${searchParams.get("a")}`)
-        : undefined;
-    return createInitialQuizState(preparedQuestions, mode, mirrorScore ?? undefined, pairScore ?? undefined);
+    return createInitialQuizState(preparedQuestions, mode, mirrorScore ?? undefined);
   });
 
   // Slide direction
@@ -112,8 +107,6 @@ export default function QuizPageClient() {
   const progressColor =
     mode === "mirror"
       ? "#A8D8C8"
-      : mode === "pair"
-      ? "#E8A87C"
       : "#8B9DAF";
 
   return (
@@ -140,7 +133,7 @@ export default function QuizPageClient() {
           {quizState.currentIndex + 1} / 15
         </span>
 
-        {mode !== "self" && (
+        {mode === "mirror" && (
           <span
             className="text-xs font-medium px-2 py-1 rounded-full"
             style={{
@@ -148,7 +141,7 @@ export default function QuizPageClient() {
               color: progressColor,
             }}
           >
-            {mode === "mirror" ? "🪞 他测" : "💞 配对"}
+            🪞 他测
           </span>
         )}
         {mode === "self" && <div className="w-9" />}

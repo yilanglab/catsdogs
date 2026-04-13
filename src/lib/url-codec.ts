@@ -5,7 +5,6 @@
  * URL格式：
  *   结果页：/result?e=9&s=10&c=8
  *   照镜子：/mirror?from=e9s10c8
- *   CP配对：/pair?a=e9s10c8
  */
 
 import type { CompactScore, ResultUrlParams, Score } from './types';
@@ -116,28 +115,6 @@ export function buildMirrorUrl(selfScore: Score, baseUrl = ''): string {
   return `${baseUrl}/mirror?from=${encodeScore(selfScore)}`;
 }
 
-// ─── CP配对链接 ────────────────────────────────────────────
-
-/**
- * 从CP配对URL的 `a` 参数解析用户A得分
- * @example parsePairUrl("a=e9s10c8") → {energy:9, strategy:10, core:8}
- */
-export function parsePairUrl(search: string): Score | null {
-  const params = new URLSearchParams(search);
-  const a = params.get('a');
-  if (!a) return null;
-  return decodeScore(a);
-}
-
-/**
- * 构造CP配对链接（A邀请B一起测）
- * @example buildPairUrl({energy:9, strategy:10, core:8}, "https://catsdogs.com")
- *          → "https://catsdogs.com/pair?a=e9s10c8"
- */
-export function buildPairUrl(scoreA: Score, baseUrl = ''): string {
-  return `${baseUrl}/pair?a=${encodeScore(scoreA)}`;
-}
-
 // ─── 工具函数 ──────────────────────────────────────────────
 
 /**
@@ -157,7 +134,6 @@ export function parseAnyScoreUrl(search: string): Score | null {
   return (
     parseResultUrl(search) ??
     parseMirrorUrl(search) ??
-    parsePairUrl(search) ??
     null
   );
 }

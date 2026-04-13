@@ -5,7 +5,7 @@
  * 设计原则：
  * - 纯函数为主，状态在 React 层管理（通过 useQuizState hook）
  * - 选项乱序：分值跟随选项文字，保证乱序后计分正确
- * - 支持 self/mirror/pair 三种模式
+ * - 支持 self/mirror 两种模式
  */
 
 import type {
@@ -61,13 +61,11 @@ export function prepareQuestions(questions: Question[]): Question[] {
  * @param questions 已准备好（选项乱序）的题目列表
  * @param mode 答题模式
  * @param mirrorFromScore 照镜子模式：被测人的自测得分（从URL解码）
- * @param pairFromScore CP配对模式：用户A的得分（从URL解码）
  */
 export function createInitialQuizState(
   questions: Question[],
   mode: QuizMode = 'self',
   mirrorFromScore?: Score,
-  pairFromScore?: Score
 ): QuizState {
   return {
     mode,
@@ -75,7 +73,6 @@ export function createInitialQuizState(
     answers: [],
     isCompleted: false,
     mirrorFromScore,
-    pairFromScore,
   };
 }
 
@@ -133,13 +130,11 @@ export function resetQuiz(
   questions: Question[],
   mode: QuizMode = 'self',
   mirrorFromScore?: Score,
-  pairFromScore?: Score
 ): QuizState {
   return createInitialQuizState(
     prepareQuestions(questions),
     mode,
     mirrorFromScore,
-    pairFromScore
   );
 }
 
@@ -220,7 +215,7 @@ export function computeResult(state: QuizState): {
 
 /**
  * 根据答题模式决定显示题目的哪个文本版本
- * - self / pair：使用自测版 question.text
+ * - self：使用自测版 question.text
  * - mirror：使用他测版 question.textMirror
  */
 export function getQuestionText(question: Question, mode: QuizMode): string {
@@ -234,7 +229,6 @@ export function getModeName(mode: QuizMode): string {
   const map: Record<QuizMode, string> = {
     self: '自测',
     mirror: '他测（照镜子）',
-    pair: '配对测试',
   };
   return map[mode];
 }
@@ -246,7 +240,6 @@ export function getQuizTitle(mode: QuizMode): string {
   switch (mode) {
     case 'self':    return '测测你是哪种猫人狗人';
     case 'mirror':  return '以你朋友的视角回答';
-    case 'pair':    return '测测你和 TA 是什么搭配';
   }
 }
 
@@ -274,7 +267,7 @@ export function deserializeAnswers(
   try {
     const [modeStr, answerStr] = serialized.split('|');
     const mode = modeStr as QuizMode;
-    if (!['self', 'mirror', 'pair'].includes(mode)) return null;
+    if (!['self', 'mirror'].includes(mode)) return null;
 
     const answers = answerStr
       ? answerStr.split(',').map(part => {

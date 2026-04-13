@@ -210,13 +210,6 @@ export default function HomePage() {
             href="/mirror"
             color="#A8D8C8"
           />
-          <SocialCard
-            emoji="💞"
-            title="CP 配对"
-            desc="和 TA 互测，看看你们是什么组合"
-            href="/pair"
-            color="#E8A87C"
-          />
         </motion.div>
 
       </motion.div>

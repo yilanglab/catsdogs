@@ -13,7 +13,7 @@ import {
   getQuestionText,
   computeResult,
 } from '@/lib/quiz-engine';
-import { parseMirrorUrl, parsePairUrl, buildResultUrl, encodeScore } from '@/lib/url-codec';
+import { parseMirrorUrl, buildResultUrl, encodeScore } from '@/lib/url-codec';
 import type { QuizMode, QuizState, Option } from '@/lib/types';
 
 // ─── 动画变体 ──────────────────────────────────────────────────────
@@ -75,9 +75,7 @@ function QuizPageInner() {
 
   // 解析模式和来源得分
   const mode = useMemo<QuizMode>(() => {
-    const search = searchParams.toString() ? `?${searchParams.toString()}` : '';
     if (searchParams.has('from')) return 'mirror';
-    if (searchParams.has('a')) return 'pair';
     return 'self';
   }, [searchParams]);
 
@@ -86,17 +84,12 @@ function QuizPageInner() {
     return parseMirrorUrl(`from=${searchParams.get('from') ?? ''}`);
   }, [mode, searchParams]);
 
-  const pairFromScore = useMemo(() => {
-    if (mode !== 'pair') return undefined;
-    return parsePairUrl(`a=${searchParams.get('a') ?? ''}`);
-  }, [mode, searchParams]);
-
   // 准备随机化题目（只初始化一次）
   const preparedQuestions = useMemo(() => prepareQuestions(QUESTIONS), []);
 
   // 答题状态
   const [quizState, setQuizState] = useState<QuizState>(() =>
-    createInitialQuizState(preparedQuestions, mode, mirrorFromScore ?? undefined, pairFromScore ?? undefined)
+    createInitialQuizState(preparedQuestions, mode, mirrorFromScore ?? undefined)
   );
 
   // 选中但未提交的选项（用于动画反馈）
@@ -126,9 +119,6 @@ function QuizPageInner() {
         if (mode === 'mirror' && mirrorFromScore) {
           // 跳转到照镜子对比报告页
           router.push(`/mirror?from=${encodeScore(mirrorFromScore)}&e=${score.energy}&s=${score.strategy}&c=${score.core}`);
-        } else if (mode === 'pair' && pairFromScore) {
-          // 跳转到CP配对结果页
-          router.push(`/pair?a=${encodeScore(pairFromScore)}&e=${score.energy}&s=${score.strategy}&c=${score.core}`);
         } else {
           router.push(buildResultUrl(score));
         }
@@ -136,7 +126,7 @@ function QuizPageInner() {
         console.error('[quiz] compute result error', e);
       }
     }
-  }, [quizState.isCompleted, quizState, mode, mirrorFromScore, pairFromScore, router]);
+  }, [quizState.isCompleted, quizState, mode, mirrorFromScore, router]);
 
   // 选择选项
   function handleSelectOption(option: Option) {
@@ -160,12 +150,7 @@ function QuizPageInner() {
     setPendingOption(null);
   }
 
-  // 模式标题
-  const modeLabel = mode === 'mirror'
-    ? '他测 · 照镜子'
-    : mode === 'pair'
-    ? 'CP 配对测试'
-    : null;
+  const modeLabel = mode === 'mirror' ? '他测 · 照镜子' : null;
 
   return (
     <main

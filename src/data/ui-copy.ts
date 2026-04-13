@@ -25,7 +25,6 @@ export const QUIZ_COPY = {
   prevButton: '上一题',
   submitButton: '查看结果',
   mirrorModeHint: '你正在以朋友的视角作答',
-  pairModeHint: '完成测试后查看你们的 CP 契合度',
   selectPrompt: '选择最接近你真实反应的选项',
 } as const;
 
@@ -131,55 +130,6 @@ export const MIRROR_COPY = {
   // 操作按钮
   shareReportButton: '分享差异报告',
   selfTestButton: '我也来测一测',
-} as const;
-
-// ─── CP 配对模式 ──────────────────────────────────────────
-
-export const PAIR_COPY = {
-  // 入口提示
-  pageTitle: 'CP 配对',
-  intro: '完成测试，看看你们的契合度',
-
-  // 配对结果
-  compatibilityLabel: '契合度',
-  compatibilityUnit: '分',
-  pairTypeLabel: '你们是',
-
-  // 组合类型
-  pairTypes: {
-    'cat-cat': '平行宇宙型',
-    'cat-dog': '互补充电型',
-    'dog-dog': '热情碰撞型',
-    'wolf-pure': '保护者联盟型',
-    'power-couple': '强强联合型',
-    'fox-fox': '智者同盟型',
-    generic: '均衡搭档型',
-  },
-
-  // 组合类型描述
-  pairTypeDescriptions: {
-    'cat-cat': '猫+猫 = 互不打扰的高级感，但要小心冷到冻住',
-    'cat-dog': '猫+狗 = 一个给空间一个给温暖，经典搭配',
-    'dog-dog': '狗+狗 = 感情浓度超标，但要注意谁来当理性那个',
-    'wolf-pure': '狼+纯 = 一个强一个软，前提是强的那个别太控制',
-    'power-couple': '两个强者的组合，能量满满但要注意方向一致',
-    'fox-fox': '两个高情商的人在一起，清爽不腻，彼此尊重',
-    generic: '均衡搭档，各有所长，互相补位',
-  },
-
-  // 相处建议标签
-  tipsLabel: '相处建议',
-  tipForALabel: '给你的建议',
-  tipForBLabel: '给 TA 的建议',
-
-  // 品种并排展示
-  meLabel: '你',
-  partnerLabel: 'TA',
-
-  // 操作按钮
-  shareCardButton: '分享配对结果',
-  retestButton: '重新测试',
-  inviteOtherButton: '换个人来配对',
 } as const;
 
 // ─── 通用 ─────────────────────────────────────────────────

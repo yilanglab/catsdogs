@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BREEDS } from "@/data/breeds";
-import { parseResultUrl, buildMirrorUrl, buildPairUrl } from "@/lib/url-codec";
+import { parseResultUrl, buildMirrorUrl } from "@/lib/url-codec";
 import {
   resolveDimensions,
   describeEnergyLevel,
@@ -88,10 +88,6 @@ export default function ResultPageClient() {
   const mirrorUrl =
     typeof window !== "undefined"
       ? buildMirrorUrl(s, window.location.origin)
-      : "";
-  const pairUrl =
-    typeof window !== "undefined"
-      ? buildPairUrl(s, window.location.origin)
       : "";
 
   function handleShare() {
@@ -295,13 +291,6 @@ export default function ResultPageClient() {
               desc="让朋友用他视角回答，看看认知差异有多大"
               color="#A8D8C8"
               href={mirrorUrl}
-            />
-            <SocialActionCard
-              emoji="💞"
-              title="和 TA 配对"
-              desc="一起测，看看你们是什么组合"
-              color="#E8A87C"
-              href={pairUrl}
             />
           </div>
         </motion.div>
