@@ -25,6 +25,26 @@ export const BREEDS: Breed[] = [
     color: '#8B9DAF',
     bestMatch: 'bernese',
     nemesis: 'siamese',
+    innerMechanism: {
+      stressResponse: '自动进入「世界与我无关」模式，等压力自己过去。如果过不去——那就适应它。',
+      rechargeMode: '一个人窝着，什么也不做也不想，「发呆」就是你最高效的充电方式。',
+      emotionalPattern: '情绪波动极小，不是没有情绪，是早就跟情绪达成了和平协议。',
+    },
+    workStyle: {
+      asLeader: '佛系放权派，只要结果OK过程随意。下属爱你，但你的上司可能觉得你缺乏野心。',
+      asFollower: '最不需要被管的员工。给我任务、给我deadline、然后别来烦我。',
+      meetingStyle: '全程安静，只在被点名时用最少的字回答最关键的问题。',
+    },
+    loveStyle: {
+      crushSignal: '开始愿意为对方打破自己的日常节奏——这对你来说已经是惊天动地了。',
+      dealBreaker: '对方试图「改造」你，或者觉得你的生活方式是「不上进」。',
+      idealRelationship: '各自躺着，偶尔交换一个眼神，不说话也很舒服。',
+    },
+    socialHabit: {
+      friendGroupRole: '潜水冠军，每年冒泡三次，但每次出现大家都很惊喜。',
+      socialBattery: '出厂就是省电模式，聚会超过 90 分钟开始心不在焉。',
+      friendshipRedFlag: '不请自来的热情、强行组局、以及「你怎么又不出门」的关心。',
+    },
   },
   {
     id: 'american-shorthair',
@@ -42,6 +62,26 @@ export const BREEDS: Breed[] = [
     color: '#A8B8C8',
     bestMatch: 'samoyed',
     nemesis: 'bengal',
+    innerMechanism: {
+      stressResponse: '不会崩溃也不会爆发，就是默默消化，消化完了跟没事一样。',
+      rechargeMode: '做点简单的、不需要动脑的事——刷剧、散步、整理房间。',
+      emotionalPattern: '情绪曲线几乎是一条直线，偶尔有波动也能迅速回归均值。',
+    },
+    workStyle: {
+      asLeader: '不会给团队压力，也不会画大饼。稳稳地推进，不出彩但也不出错。',
+      asFollower: '让干啥干啥，不抱怨不邀功，是领导最省心的存在。',
+      meetingStyle: '不抢话、不反对、偶尔点头。散会后默默把该做的做了。',
+    },
+    loveStyle: {
+      crushSignal: '对你的回复速度从「随缘」变成了「秒回」——虽然内容还是很淡定。',
+      dealBreaker: '戏太多、情绪波动大、动不动就要你表态站队。',
+      idealRelationship: '不需要轰轰烈烈，就是两个人在一起比一个人舒服一点点就够了。',
+    },
+    socialHabit: {
+      friendGroupRole: '被遗忘也不生气的那个人，但大家想起来都觉得「对哦还有 TA」。',
+      socialBattery: '中等偏低，能社交但绝不主动发起，属于「你来我就接」型。',
+      friendshipRedFlag: '被迫当传话筒、被卷入别人的纷争、需要你选边站的场合。',
+    },
   },
   {
     id: 'tuxedo',
@@ -59,6 +99,26 @@ export const BREEDS: Breed[] = [
     color: '#C8C8D8',
     bestMatch: 'husky',
     nemesis: 'doberman',
+    innerMechanism: {
+      stressResponse: '先疯一阵，然后突然冷静下来，用一种完全出人意料的角度解决问题。',
+      rechargeMode: '做一件从没做过的事——哪怕只是换条路回家。新鲜感就是你的充电宝。',
+      emotionalPattern: '情绪像过山车但复位速度极快，上一秒崩溃下一秒已经在笑了。',
+    },
+    workStyle: {
+      asLeader: '团队里最有创意的领导，但下属永远猜不到你下一步要干什么。',
+      asFollower: '常规任务做得一般，但一旦遇到「别人搞不定的怪题」就是你的主场。',
+      meetingStyle: '要么走神到外太空，要么突然说出一个天才想法让所有人愣住。',
+    },
+    loveStyle: {
+      crushSignal: '开始对对方进行「密集的无厘头骚扰」——恭喜你，这就是表白。',
+      dealBreaker: '无聊。对方一旦变得可预测，你就开始想找新的刺激了。',
+      idealRelationship: '每天都有新鲜事，两个人在一起比单口相声还好笑。',
+    },
+    socialHabit: {
+      friendGroupRole: '气氛组组长，负责在群死的时候扔出一个离谱的话题。',
+      socialBattery: '取决于有没有好玩的事。有趣的局能续到凌晨，无聊的局 10 分钟走人。',
+      friendshipRedFlag: '太正经、太无聊、以及试图用「成熟」来压制你的快乐。',
+    },
   },
 
   // ─── 猫系内核 × 狐系策略 ─────────────────────────────────
@@ -79,6 +139,26 @@ export const BREEDS: Breed[] = [
     color: '#7B8FA0',
     bestMatch: 'shiba-inu',
     nemesis: 'golden-retriever',
+    innerMechanism: {
+      stressResponse: '把自己关进精神小黑屋，用逻辑把问题拆解到没有情绪的程度。如果问题无法解决，就说服自己不在乎。',
+      rechargeMode: '一个人待着、不被打扰、做些不需要回应任何人的事。安静到能听见自己思考的声音。',
+      emotionalPattern: '外表永远平静如水，但内心有一套精密的情绪仪表盘，只不过只有极少数人能读懂。',
+    },
+    workStyle: {
+      asLeader: '不会频繁开会刷存在感，但你发布的每条指令都逻辑严密、滴水不漏。下属会觉得你冷，但不得不服。',
+      asFollower: '理想上司是「给我目标然后别管我」型。最受不了事无巨细的微管理，会在内心默默给领导扣分。',
+      meetingStyle: '能不开就不开，非开不可就用最少的话把最关键的信息说完。',
+    },
+    loveStyle: {
+      crushSignal: '开始主动找你说话了——不是闲聊，而是分享那些平时不会告诉别人的想法。',
+      dealBreaker: '逻辑混乱、过度黏人、没有自己的精神世界。以及——在你独处时不请自来。',
+      idealRelationship: '各自有独立空间，但偶尔对视时知道「这个人懂我」。不需要秀恩爱，但需要灵魂共振。',
+    },
+    socialHabit: {
+      friendGroupRole: '那个很少发言但每次说话都被截图的人。',
+      socialBattery: '出厂自带省电模式，聚会超过 2 小时自动进入飞行模式。',
+      friendshipRedFlag: '不尊重边界的人、自来熟、毫无铺垫就要你分享隐私的人。',
+    },
   },
   {
     id: 'ragdoll',
@@ -96,6 +176,26 @@ export const BREEDS: Breed[] = [
     color: '#B8A9C9',
     bestMatch: 'german-shepherd',
     nemesis: 'border-collie',
+    innerMechanism: {
+      stressResponse: '表面云淡风轻，内心已经把 Plan B 到 Plan D 全想好了。绝对不会让你看到手忙脚乱的样子。',
+      rechargeMode: '精致的独处——泡澡、听音乐、整理空间。充电环境必须是「有质感的舒适」，绝不是随便躺着。',
+      emotionalPattern: '情绪波动有，但从不外露。你的微笑是标准配置，不代表心情。',
+    },
+    workStyle: {
+      asLeader: '温柔但有距离感的管理者，擅长让下属觉得「被尊重」的同时把活推出去。',
+      asFollower: '表面配合度极高，但内心有一把清晰的算盘：这件事对我有什么好处。',
+      meetingStyle: '发言永远得体、不得罪人，但仔细复盘你会发现——你没有承诺任何事。',
+    },
+    loveStyle: {
+      crushSignal: '愿意在你面前卸下「得体」的伪装，露出真实的、不那么完美的一面。',
+      dealBreaker: '粗糙、不体面、在公共场合让你丢脸。以及——试图强行闯入你精心维护的秩序。',
+      idealRelationship: '外人看来是令人羡慕的优雅情侣，两人独处时可以不端着、不演。',
+    },
+    socialHabit: {
+      friendGroupRole: '看起来跟谁都好，但深交名单上一共就三五个人。',
+      socialBattery: '能社交很久但会精确计算投入产出比，无效社交一秒都不浪费。',
+      friendshipRedFlag: '突破你精心维护的社交距离、把你的客气当真心、在背后说你「虚伪」。',
+    },
   },
   {
     id: 'abyssinian',
@@ -113,6 +213,26 @@ export const BREEDS: Breed[] = [
     color: '#A8D8C8',
     bestMatch: 'corgi',
     nemesis: 'bernese',
+    innerMechanism: {
+      stressResponse: '立刻开始找新的出路。压力对你来说不是墙，是一扇还没打开的门。',
+      rechargeMode: '学一个新技能、去一个没去过的地方、跟一个有趣的陌生人聊天——新鲜感就是你的命。',
+      emotionalPattern: '情绪来得快去得也快，不会在同一个情绪里待太久，因为下一个好奇心已经到了。',
+    },
+    workStyle: {
+      asLeader: '最擅长 0 到 1 的创业型领导，一旦进入稳定运营期就开始坐不住了。',
+      asFollower: '常规工作让你痛苦，但如果任务有「从没有人做过」的成分，你能爆发 200% 的产出。',
+      meetingStyle: '别人在讨论 A 方案和 B 方案时，你已经在想 C 方案了。',
+    },
+    loveStyle: {
+      crushSignal: '开始把对方纳入自己的探险版图——带你去我发现的宝藏小店、分享我最新的兴趣。',
+      dealBreaker: '试图把你关在笼子里。控制你的时间表、限制你的交友圈、或者让你只能做「一件事」。',
+      idealRelationship: '两个人一起探索世界，各自也有各自的冒险。在一起永远有新话题聊。',
+    },
+    socialHabit: {
+      friendGroupRole: '那个带大家去新地方、安利新事物的人。朋友圈更新频率最高。',
+      socialBattery: '超大容量，但只给「有趣」的人充值。无聊的社交比独处还累。',
+      friendshipRedFlag: '一成不变的人、只会抱怨但不行动的人、以及想让你「稳定下来」的人。',
+    },
   },
 
   // ─── 猫系内核 × 狼系策略 ─────────────────────────────────
@@ -133,6 +253,26 @@ export const BREEDS: Breed[] = [
     color: '#6B7B8C',
     bestMatch: 'doberman',
     nemesis: 'tuxedo',
+    innerMechanism: {
+      stressResponse: '更加沉默，但内心已经开始部署方案。你处理压力的方式是「掌控它」，而不是逃避或发泄。',
+      rechargeMode: '在自己的领地里，按照自己的节奏，做自己说了算的事。核心需求是「一切尽在掌控」。',
+      emotionalPattern: '深水区。表面波澜不惊，底下暗流涌动，但你绝不会让别人看到。',
+    },
+    workStyle: {
+      asLeader: '天生的掌权者，不怒自威。你不需要拍桌子，一个眼神就够了。',
+      asFollower: '只服比你强的人。如果领导的水平不如你，你会非常痛苦——但依然沉默。',
+      meetingStyle: '通常最后发言，一锤定音。你说完之后，没有人会再质疑。',
+    },
+    loveStyle: {
+      crushSignal: '对你展现出「保护欲」——不是嘴上说，而是默默替你挡掉麻烦。',
+      dealBreaker: '挑战你的权威、在外人面前不给你面子、试图打破你的规则。',
+      idealRelationship: '你掌舵，对方安心做乘客。但你选择的乘客，必须是你真正尊重的人。',
+    },
+    socialHabit: {
+      friendGroupRole: '定海神针，平时不响，关键时刻一句话稳住全场。',
+      socialBattery: '不高，但在自己的圈子里可以很放松。核心是「我选择跟谁社交」。',
+      friendshipRedFlag: '不守规矩的人、挑战你底线的人、以及——在你的领地上放肆的人。',
+    },
   },
   {
     id: 'siamese',
@@ -150,6 +290,26 @@ export const BREEDS: Breed[] = [
     color: '#9B8BAB',
     bestMatch: 'samoyed',
     nemesis: 'shiba-inu',
+    innerMechanism: {
+      stressResponse: '嘴先行动。压力一来就开始分析、吐槽、甚至怼人，说完之后反而冷静了。',
+      rechargeMode: '跟信任的人倾诉——不是要建议，是要一个听你输出的人。倾诉完就满血了。',
+      emotionalPattern: '情绪外化且密度高，开心恨不得全世界知道，生气恨不得全世界闭嘴。',
+    },
+    workStyle: {
+      asLeader: '高效但高压的管理者。团队被你推着走，效率极高，但离职率可能也不低。',
+      asFollower: '会公开质疑不合理的决策。你的「提意见」经常被当成「找茬」。',
+      meetingStyle: '主导发言权，会打断跑题的讨论，以及直接指出「这个方案不行」。',
+    },
+    loveStyle: {
+      crushSignal: '开始管你的生活——你吃了吗、穿这么少不冷吗、那个朋友我觉得不靠谱。',
+      dealBreaker: '不回消息、敷衍你的感受、以及——你觉得对方在跟你「装」。',
+      idealRelationship: '吵吵闹闹但谁也离不开谁，你管 TA、TA 让着你，偶尔反驳让你觉得有趣。',
+    },
+    socialHabit: {
+      friendGroupRole: '群里的意见领袖，重大决定（吃什么、去哪玩）都等你拍板。',
+      socialBattery: '极高，但都花在「输出」上了。你是给别人充电的那个人。',
+      friendshipRedFlag: '阳奉阴违、当面不说背后乱说、以及——你觉得对方在「敷衍」你。',
+    },
   },
   {
     id: 'bengal',
@@ -167,6 +327,26 @@ export const BREEDS: Breed[] = [
     color: '#D4A574',
     bestMatch: 'border-collie',
     nemesis: 'british-shorthair',
+    innerMechanism: {
+      stressResponse: '压力是燃料。越有压力越兴奋，没有挑战的日子对你来说才是真正的痛苦。',
+      rechargeMode: '做高强度的事——运动、竞技、或者任何能让你感觉「在赢」的活动。',
+      emotionalPattern: '情绪永远在高位运行。你不太有「平淡」的时候，要么在巅峰要么在低谷。',
+    },
+    workStyle: {
+      asLeader: '狼性领导，目标清晰、执行凶猛。团队跟你干很累但成长很快。',
+      asFollower: '你不会永远当下属。一旦觉得天花板到了，要么晋升要么走人。',
+      meetingStyle: '直奔结果，不聊过程。你的口头禅是「所以结论是什么？」',
+    },
+    loveStyle: {
+      crushSignal: '把对方当成「征服目标」——不是物化，而是你用追事业的劲头去追人。',
+      dealBreaker: '对方太弱、太无趣、或者太容易得到。没有挑战性的关系让你窒息。',
+      idealRelationship: '势均力敌的对手型恋人，你们在一起是因为彼此都很强，而不是因为谁需要谁。',
+    },
+    socialHabit: {
+      friendGroupRole: '要么不来，来了就是全场焦点。你的气场自带聚光灯。',
+      socialBattery: '取决于场合。能帮你拓展人脉的局精力无限，纯闲聊的局 5 分钟走人。',
+      friendshipRedFlag: '拖后腿的人、安于现状的人、以及——不敢跟你正面硬碰硬的人。',
+    },
   },
 
   // ─── 犬系内核 × 纯系策略 ─────────────────────────────────
@@ -187,6 +367,26 @@ export const BREEDS: Breed[] = [
     color: '#E8A87C',
     bestMatch: 'british-shorthair',
     nemesis: 'bengal',
+    innerMechanism: {
+      stressResponse: '一个人默默扛着，不想给别人添麻烦。实在扛不住了才小声说一句「有点累」。',
+      rechargeMode: '被信任的人安静地陪着，不需要说话，知道有人在就够了。',
+      emotionalPattern: '平稳如湖面，但偶尔被某句话击中时会突然红了眼眶——然后迅速假装没事。',
+    },
+    workStyle: {
+      asLeader: '最温柔的领导，绝不会骂人。团队氛围好，但有时候缺乏推动力。',
+      asFollower: '给什么活干什么活，从不推脱也从不邀功。你是团队里最被低估的人。',
+      meetingStyle: '不怎么发言，但你点头了大家就安心了。',
+    },
+    loveStyle: {
+      crushSignal: '开始默默帮你做事——不说出来，但你发现很多小事已经被安排好了。',
+      dealBreaker: '被忽视、被当成透明人、以及——你的付出被当作理所当然。',
+      idealRelationship: '平淡温暖的日常，不需要惊喜，只要「你需要我，我一直在」。',
+    },
+    socialHabit: {
+      friendGroupRole: '那个永远不会拒绝帮忙的人。大家有困难第一个想到你。',
+      socialBattery: '不高，但为了重要的人可以一直在线。',
+      friendshipRedFlag: '被利用还不自知——不是雷区，是你的盲区。朋友得替你把关。',
+    },
   },
   {
     id: 'samoyed',
@@ -204,6 +404,26 @@ export const BREEDS: Breed[] = [
     color: '#F5E6CA',
     bestMatch: 'siamese',
     nemesis: 'russian-blue',
+    innerMechanism: {
+      stressResponse: '先笑一下，然后努力把事情往好的方向想。实在想不通就找朋友聊聊。',
+      rechargeMode: '跟喜欢的人在一起做开心的事。你的能量来自「被爱的感觉」。',
+      emotionalPattern: '天然偏向积极，但不是没有负面情绪——只是你会自动过滤掉，先给世界一个笑脸。',
+    },
+    workStyle: {
+      asLeader: '大家都喜欢你，但可能不太怕你。团队氛围一流，执行力看运气。',
+      asFollower: '最讨人喜欢的员工，跟谁都处得来。但有时候会因为不好意思拒绝而接了太多活。',
+      meetingStyle: '微笑、点头、附和。你的发言永远不会让任何人不舒服。',
+    },
+    loveStyle: {
+      crushSignal: '对你笑得更甜了——虽然你对所有人都甜，但那个人会收到加量版。',
+      dealBreaker: '冷暴力。什么都比你直接说「我不喜欢你」更让你难过。',
+      idealRelationship: '甜甜的、暖暖的、每天都有人跟你说「你很好」。',
+    },
+    socialHabit: {
+      friendGroupRole: '团宠。大家吵架的时候负责和稀泥，聚会的时候负责让所有人开心。',
+      socialBattery: '超高，而且越社交越充电。唯一消耗电量的社交是——有人当着你面起冲突。',
+      friendshipRedFlag: '你几乎没有主动设定过雷区。所以有时候别人踩过界了你都没意识到。',
+    },
   },
   {
     id: 'golden-retriever',
@@ -221,6 +441,26 @@ export const BREEDS: Breed[] = [
     color: '#F4A460',
     bestMatch: 'american-shorthair',
     nemesis: 'maine-coon',
+    innerMechanism: {
+      stressResponse: '用更大的热情去对抗压力。忙起来就不难过了——至少你是这么告诉自己的。',
+      rechargeMode: '人群、热闹、被需要的感觉。独处反而让你焦虑。',
+      emotionalPattern: '情绪外放且感染力强，你开心全场开心，你低落大家都感觉得到。',
+    },
+    workStyle: {
+      asLeader: '充满感染力的领导者，擅长激励团队。但要小心：你可能过度承诺。',
+      asFollower: '最积极的执行者，永远第一个举手。但有时候会因为太想表现而用力过猛。',
+      meetingStyle: '积极发言、主动揽活。散会后你的待办列表总是最长的。',
+    },
+    loveStyle: {
+      crushSignal: '热情加倍——本来就热情了，喜欢你之后直接变成人形暖炉。',
+      dealBreaker: '被拒绝、被冷落、或者感觉到「你不需要我」。',
+      idealRelationship: '每天都要确认「你爱我吧」，然后得到一个拥抱。很简单，但你真的需要。',
+    },
+    socialHabit: {
+      friendGroupRole: '组局发起者 + 气氛担当。没有你的聚会总觉得少了点什么。',
+      socialBattery: '核动力级别。唯一能让你电量下降的是「感觉自己多余」。',
+      friendshipRedFlag: '说好了要来结果放鸽子、需要你的时候热情用完了就不理你、以及——让你觉得「我是不是太烦了」。',
+    },
   },
 
   // ─── 犬系内核 × 狐系策略 ─────────────────────────────────
@@ -241,6 +481,26 @@ export const BREEDS: Breed[] = [
     color: '#E8C49A',
     bestMatch: 'russian-blue',
     nemesis: 'golden-retriever',
+    innerMechanism: {
+      stressResponse: '往内缩。把自己封起来硬扛，打死也不开口求助。',
+      rechargeMode: '独处，但不是因为不需要人——是因为你需要先跟自己和解。',
+      emotionalPattern: '闷骚。外面看着一脸「我没事」，里面已经写了十篇小作文了。',
+    },
+    workStyle: {
+      asLeader: '有原则但不太会变通，团队会尊重你但觉得你有点「轴」。',
+      asFollower: '让你做的事你做，不让你做的事你也不会主动揽。你有自己的职业尊严感。',
+      meetingStyle: '不说话，但如果有人说了不对的话，你的微表情已经出卖了一切。',
+    },
+    loveStyle: {
+      crushSignal: '从「保持距离」变成「允许你靠近」。你不会主动追人，但会给出微妙的信号。',
+      dealBreaker: '轻易承诺又做不到、不尊重你的自尊心、以及——在别人面前揭你短。',
+      idealRelationship: '不用说太多话，但彼此心里都有数。忠诚到让对方安心，但嘴上绝对不会承认。',
+    },
+    socialHabit: {
+      friendGroupRole: '那个看起来最不需要朋友的人，但一旦你认定了谁，就是过命的交情。',
+      socialBattery: '偏低，但跟对的人在一起可以一直充电。错的人在身边则加速放电。',
+      friendshipRedFlag: '背叛信任。这是唯一的雷区，但一旦触碰，永远没有第二次机会。',
+    },
   },
   {
     id: 'corgi',
@@ -258,6 +518,26 @@ export const BREEDS: Breed[] = [
     color: '#F0B060',
     bestMatch: 'abyssinian',
     nemesis: 'maine-coon',
+    innerMechanism: {
+      stressResponse: '迅速评估形势，然后用最小成本解决问题。你处理压力就像打折购物——永远找性价比最高的方案。',
+      rechargeMode: '跟不同的人聊天、交换信息、拓展社交网络。你的充电方式就是「连接」。',
+      emotionalPattern: '情绪管理大师。不是没有情绪，是你知道什么时候该展示什么情绪。',
+    },
+    workStyle: {
+      asLeader: '最会「向上管理」的领导。你的团队在组织里资源永远不少。',
+      asFollower: '不会跟领导对着干，但会用最巧妙的方式把自己的想法植入领导的脑子里。',
+      meetingStyle: '发言总是恰到好处——不早不晚、不多不少、谁都不得罪但观点清晰。',
+    },
+    loveStyle: {
+      crushSignal: '开始在你面前卸下「八面玲珑」的面具，让你看到真实的、没那么圆滑的自己。',
+      dealBreaker: '对方太直太愣，在社交场合让你下不来台。以及——看穿你的算计还当面说出来。',
+      idealRelationship: '彼此都是聪明人，不需要说破但心里都清楚。高效的爱情不浪费时间。',
+    },
+    socialHabit: {
+      friendGroupRole: '人脉枢纽。想认识谁？找你。想约局？你来组。',
+      socialBattery: '超高且精准分配。VIP 好友和普通好友获得的社交投入完全不同。',
+      friendshipRedFlag: '不按规则出牌的人、伸手党、以及——看不懂你给的暗示还反复踩线的人。',
+    },
   },
   {
     id: 'husky',
@@ -275,6 +555,26 @@ export const BREEDS: Breed[] = [
     color: '#C8B8A8',
     bestMatch: 'tuxedo',
     nemesis: 'doberman',
+    innerMechanism: {
+      stressResponse: '用搞笑化解。越痛苦越搞笑，别人以为你没心没肺，其实你只是不想让气氛变沉重。',
+      rechargeMode: '制造欢乐。让别人笑了你就充满了电——你的能量来自「被需要的快乐」。',
+      emotionalPattern: '外表是表情包，内心是文艺片。你的笑容是盔甲，拆掉盔甲的你比谁都敏感。',
+    },
+    workStyle: {
+      asLeader: '下属爱死你，因为你是最好玩的领导。但有时候大家分不清你是在开玩笑还是在下指令。',
+      asFollower: '开会气氛终结者（好的那种）。但你需要提醒自己：有些场合真的不适合搞笑。',
+      meetingStyle: '每次你发言大家都在笑。但你偶尔想认真的时候，没人当回事。这让你比想象中更孤独。',
+    },
+    loveStyle: {
+      crushSignal: '在你面前突然变得正经了——因为搞笑面具在喜欢的人面前会自动卸载。',
+      dealBreaker: '对方真的觉得你只是个搞笑的人，看不到笑容背后的深情。',
+      idealRelationship: '大部分时间嘻嘻哈哈，但偶尔的深夜对话里，你终于可以不搞笑、不表演、只是做自己。',
+    },
+    socialHabit: {
+      friendGroupRole: '行走的快乐源泉。大家心情不好第一个想到你，因为你总能让人笑。',
+      socialBattery: '表面无限，实际消耗很大。因为「逗笑别人」是一份隐形的情绪劳动。',
+      friendshipRedFlag: '只找你开心不关心你难过的人。你是朋友的解压玩具，但谁是你的？',
+    },
   },
 
   // ─── 犬系内核 × 狼系策略 ─────────────────────────────────
@@ -295,6 +595,26 @@ export const BREEDS: Breed[] = [
     color: '#4A4A5A',
     bestMatch: 'maine-coon',
     nemesis: 'husky',
+    innerMechanism: {
+      stressResponse: '更加克制。压力越大你越冷静，因为你知道——崩溃是奢侈品，你负担不起。',
+      rechargeMode: '独处 + 秩序感。整理房间、制定计划、把生活安排得井井有条，控制感让你安心。',
+      emotionalPattern: '深海型。表面永远平静克制，底下是你从不示人的汹涌深情。',
+    },
+    workStyle: {
+      asLeader: '严格但公正，团队可能不敢跟你开玩笑，但绝对信任你的判断。',
+      asFollower: '完美执行者。给你的任务一定高质量完成，但别指望你会邀功。',
+      meetingStyle: '准时、高效、直击要点。你最讨厌的事就是「开了一个没有结论的会」。',
+    },
+    loveStyle: {
+      crushSignal: '开始默默为你规划未来——买东西多买一份、行程里多留一个位置。',
+      dealBreaker: '不守承诺。你可以接受缺点，但不能接受「说到做不到」。',
+      idealRelationship: '不需要甜言蜜语，但每一个承诺都是兑现的。用行动证明的爱才是真的。',
+    },
+    socialHabit: {
+      friendGroupRole: '大家的「主心骨」。出了事第一个被打电话的人。',
+      socialBattery: '不高，但会为「责任范围内」的人随叫随到。',
+      friendshipRedFlag: '不靠谱、说话不算数、以及——在你守护的人面前搞事情。',
+    },
   },
   {
     id: 'german-shepherd',
@@ -312,6 +632,26 @@ export const BREEDS: Breed[] = [
     color: '#8B7355',
     bestMatch: 'ragdoll',
     nemesis: 'tuxedo',
+    innerMechanism: {
+      stressResponse: '扛。一边焦虑一边干活，用行动盖过恐惧。你的压力释放方式是——把事情做完。',
+      rechargeMode: '被认可。一句「辛苦了」「没有你不行」就能让你续航一个月。',
+      emotionalPattern: '稳定但偏焦虑。你总在想「还有什么没考虑到」，这让你靠谱，也让你疲惫。',
+    },
+    workStyle: {
+      asLeader: '六边形战士型领导。上能跟老板谈、下能带团队、自己还能写方案。唯一的问题是——你太累了。',
+      asFollower: '最让领导放心的人。但「放心」有代价——越靠谱的人接到的活越多。',
+      meetingStyle: '做了充分准备、带了数据、准备了方案 A 和方案 B。如果你发现自己没准备就去开会，那说明这个会不重要。',
+    },
+    loveStyle: {
+      crushSignal: '开始承担对方生活里的「大事」——不是送花，而是帮你修电脑、搬家、处理复杂问题。',
+      dealBreaker: '不负责任、遇事退缩、以及——觉得「凡事有你」就可以什么都不做。',
+      idealRelationship: '并肩作战的队友。一起面对生活的复杂，互相分担、互相兜底。',
+    },
+    socialHabit: {
+      friendGroupRole: '万能工具人——但这不是贬义，因为你真的很享受「被需要」。',
+      socialBattery: '中等，但为朋友可以超频运行。你的社交电量跟「被需要程度」正相关。',
+      friendshipRedFlag: '只索取不付出的人。你可以一直给，但不代表你不会累。',
+    },
   },
   {
     id: 'border-collie',
@@ -329,6 +669,26 @@ export const BREEDS: Breed[] = [
     color: '#6B8B6B',
     bestMatch: 'bengal',
     nemesis: 'bernese',
+    innerMechanism: {
+      stressResponse: '加速运转。压力来了不是逃，是把效率拉满。但你不知道的是——你一直在透支未来的能量。',
+      rechargeMode: '完成任务。打勾的快感就是你的多巴胺来源。「休息」对你来说反而是一种压力。',
+      emotionalPattern: '焦虑底色。不忙的时候更焦虑，忙起来反而心安。你的安全感不来自「被爱」，来自「有价值」。',
+    },
+    workStyle: {
+      asLeader: '卷王型领导，以身作则到团队不好意思摸鱼。高效但高压，得适时提醒自己不是所有人都跟你一样能跑。',
+      asFollower: '永远超额完成任务。你的问题不是做得不好，是做得太多——而且停不下来。',
+      meetingStyle: '带着全场最详细的方案来，并且在别人发言时已经在心里做了 SWOT 分析。',
+    },
+    loveStyle: {
+      crushSignal: '开始把对方纳入自己的「人生规划表」——你喜欢一个人的方式是认真到可怕。',
+      dealBreaker: '不上进、浪费时间、以及——觉得你「太累了不如放松一下」。你不需要被叫停，你需要被理解。',
+      idealRelationship: '一起进步的成长型伴侣。你可以累，但你需要有人在终点等你，而不是在起点拉你回去。',
+    },
+    socialHabit: {
+      friendGroupRole: '大家的「行动力外挂」。想做什么直接 @ 你，方案第二天就出来了。',
+      socialBattery: '中等偏高，但社交也得「有目的」。纯闲聊让你坐立难安。',
+      friendshipRedFlag: '拖延症晚期、嘴上说得多做得少、以及——让你觉得「在浪费时间」的人。',
+    },
   },
 ];
 
