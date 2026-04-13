@@ -81,6 +81,46 @@ export type BreedId =
   | 'german-shepherd'
   | 'border-collie';
 
+/** 🧠 内在机制 */
+export interface InnerMechanism {
+  /** 压力反应 */
+  stressResponse: string;
+  /** 充电方式 */
+  rechargeMode: string;
+  /** 情绪模式 */
+  emotionalPattern: string;
+}
+
+/** 💼 职场风格 */
+export interface WorkStyle {
+  /** 当领导时 */
+  asLeader: string;
+  /** 当下属时 */
+  asFollower: string;
+  /** 开会风格 */
+  meetingStyle: string;
+}
+
+/** ❤️ 恋爱模式 */
+export interface LoveStyle {
+  /** 心动信号 */
+  crushSignal: string;
+  /** 雷点 */
+  dealBreaker: string;
+  /** 理想相处 */
+  idealRelationship: string;
+}
+
+/** 🤝 社交习惯 */
+export interface SocialHabit {
+  /** 朋友群角色 */
+  friendGroupRole: string;
+  /** 社交电量 */
+  socialBattery: string;
+  /** 友谊雷区 */
+  friendshipRedFlag: string;
+}
+
 /** 品种档案完整结构 */
 export interface Breed {
   id: BreedId;
@@ -112,6 +152,14 @@ export interface Breed {
   bestMatch: BreedId;
   /** 天敌品种ID */
   nemesis: BreedId;
+  /** 🧠 内在机制 */
+  innerMechanism: InnerMechanism;
+  /** 💼 职场风格 */
+  workStyle: WorkStyle;
+  /** ❤️ 恋爱模式 */
+  loveStyle: LoveStyle;
+  /** 🤝 社交习惯 */
+  socialHabit: SocialHabit;
 }
 
 // ─── 题目 ─────────────────────────────────────────────────
@@ -146,7 +194,7 @@ export interface Question {
 // ─── 答题状态 ─────────────────────────────────────────────
 
 /** 答题模式 */
-export type QuizMode = 'self' | 'mirror' | 'pair';
+export type QuizMode = 'self' | 'mirror';
 
 /** 单题作答记录 */
 export interface Answer {
@@ -167,8 +215,6 @@ export interface QuizState {
   isCompleted: boolean;
   /** 照镜子模式：被测人的自测得分（来自URL） */
   mirrorFromScore?: Score;
-  /** CP配对模式：A的得分（来自URL） */
-  pairFromScore?: Score;
 }
 
 // ─── URL 编解码 ────────────────────────────────────────────
@@ -177,7 +223,6 @@ export interface QuizState {
  * URL 参数格式
  * 结果页：?e=9&s=10&c=8
  * 照镜子：?from=e9s10c8
- * CP配对：?a=e9s10c8
  */
 export interface ResultUrlParams {
   e: number; // energy score 5-15
@@ -213,32 +258,6 @@ export interface MirrorDeviation {
   friendLevel: EnergyLevel | StrategyLevel | CoreType;
   description: string;
 }
-
-/** CP配对结果 */
-export interface PairResult {
-  breedA: BreedId;
-  breedB: BreedId;
-  scoreA: Score;
-  scoreB: Score;
-  /** 契合度评分 0-100 */
-  compatibility: number;
-  /** 组合类型名称（如"互补充电型"） */
-  pairType: PairType;
-  /** 关系解读 */
-  description: string;
-  /** 给双方的相处建议 */
-  tips: [string, string];
-}
-
-/** CP配对组合类型 */
-export type PairType =
-  | 'cat-cat'       // 猫+猫 平行宇宙
-  | 'cat-dog'       // 猫+狗 互补充电
-  | 'dog-dog'       // 狗+狗 热情碰撞
-  | 'wolf-pure'     // 狼+纯 保护者联盟
-  | 'power-couple'  // 狼+狼 强强联合
-  | 'fox-fox'       // 狐+狐 智者同盟
-  | 'generic';      // 其他组合
 
 // ─── 关系图谱 ─────────────────────────────────────────────
 
