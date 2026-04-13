@@ -17,21 +17,21 @@ import ShareCardButton from "@/components/ShareCardButton";
 import type { Breed, Score } from "@/lib/types";
 
 // ─── 动画配置 ──────────────────────────────────────────────
+// 简化动画以避免移动端卡顿 — 只用 opacity 过渡，不用 stagger
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+    transition: { duration: 0.3 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.3 },
   },
 };
 
@@ -91,12 +91,12 @@ export default function ResultPageClient() {
       : "";
 
   function handleShare() {
-    const text = `我是${breed.name}（${breed.nickname}）\n${breed.tagline}\n#猫人狗人性格测试`;
-    if (navigator.share) {
-      navigator.share({ title: "猫人狗人 · 我的动物人格", text, url: window.location.href });
-    } else {
-      navigator.clipboard?.writeText(window.location.href);
-      alert("链接已复制！");
+    const resultUrl = window.location.href;
+    const text = `我是「${breed.name}」—— ${breed.nickname}\n${breed.tagline}\n\n来测测你是哪种猫人狗人👇\n${resultUrl}`;
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("已复制到剪贴板，快去分享给朋友吧！");
+      });
     }
   }
 
@@ -107,8 +107,8 @@ export default function ResultPageClient() {
     <main className="min-h-screen bg-[#FAFAF8]">
       {/* ── Hero 区域 ── */}
       <div
-        className="relative overflow-hidden px-6 pt-16 pb-12"
-        style={{ background: themeGradient }}
+        className="relative overflow-hidden px-6 pb-12 safe-top"
+        style={{ background: themeGradient, paddingTop: 'max(4.5rem, calc(env(safe-area-inset-top) + 2.5rem))' }}
       >
         {/* 装饰圆圈 */}
         <div className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-20"
@@ -353,18 +353,15 @@ export default function ResultPageClient() {
 
         {/* 分享按钮 */}
         <motion.div variants={itemVariants} className="mt-6 space-y-3 pb-8 safe-bottom">
-          <motion.button
+          <button
             onClick={handleShare}
-            className="w-full py-4 rounded-2xl font-semibold text-lg text-white shadow-lg"
+            className="w-full py-4 rounded-2xl font-semibold text-lg text-white shadow-lg active:scale-[0.98] transition-transform"
             style={{ background: themeGradient, boxShadow: `0 8px 24px ${themeColor}40` }}
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
             <span className="flex items-center justify-center gap-2">
               分享结果 ✨
             </span>
-          </motion.button>
+          </button>
 
           {/* 生成分享图 */}
           <ShareCardButton breed={breed} dimensions={dimensions} score={s} />
@@ -421,12 +418,9 @@ function DimRow({
         </span>
       </div>
       <div className="h-1.5 bg-[#F0F0EC] rounded-full overflow-hidden">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ backgroundColor: color }}
-          initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+        <div
+          className="h-full rounded-full transition-all duration-700 ease-out"
+          style={{ backgroundColor: color, width: `${pct}%` }}
         />
       </div>
       <p className="text-xs text-[#8B9DAF] mt-1.5">{value}</p>
@@ -508,11 +502,9 @@ function SocialActionCard({
   }
 
   return (
-    <motion.div
+    <div
       onClick={handleClick}
-      className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 border border-[#E8E8E4] shadow-sm cursor-pointer"
-      whileHover={{ scale: 1.01, x: 2 }}
-      whileTap={{ scale: 0.98 }}
+      className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 border border-[#E8E8E4] shadow-sm cursor-pointer active:scale-[0.98] transition-transform"
     >
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
@@ -525,7 +517,7 @@ function SocialActionCard({
         <p className="text-xs text-[#8B9DAF] mt-0.5">{desc}</p>
       </div>
       <span className="text-[#CACACA] text-sm">›</span>
-    </motion.div>
+    </div>
   );
 }
 
